@@ -1,37 +1,12 @@
 ---
-import LayoutDefault from "../layouts/Default.astro"
+import LayoutDefault from "../layouts/Default.astro";
+import PostList from '../components/PostList.astro';
 import PostTitle from '../components/PostTitle.astro';
-
-// Use Astro.glob() to fetch all posts, and then sort them by date.
-const posts = (await Astro.glob('./blog/*.{md,mdx}')).sort(
-  (a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf()
-);
+import Welcome from '../components/Welcome.astro';
 ---
 
 <LayoutDefault>
-  <section>
-    <PostTitle>Hello World</PostTitle>
-
-    <div class="content is-large">
-      <p>• Seja muito bem vindo</p>
-      <p>• Esse é meu portfólio de jogos digitais</p>
-    </div>
-  </section>
-
-  <section>
-    <ul>
-      {posts.map((post) => (
-        <li>
-          <time datetime={post.frontmatter.pubDate}>
-            {new Date(post.frontmatter.pubDate).toLocaleDateString('pt-BR', {
-              year: 'numeric',
-              month: 'short',
-              day: 'numeric',
-            })}
-          </time>
-          <a href={post.url}>{post.frontmatter.title}</a>
-        </li>
-      ))}
-    </ul>
-  </section>
+  <PostTitle>Hello World</PostTitle>
+  <Welcome />
+  <PostList />
 </LayoutDefault>
